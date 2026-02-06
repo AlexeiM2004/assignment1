@@ -41,7 +41,29 @@ int transition_energy_calculator()
       cout << "Final quantum number n_f: ";
       cin >> n_f;
     }
+        //Photon energy calculation
+    double photon_energy = 13.6 * pow( z , 2 ) * ( 1.0 / (pow( n_f , 2)) - 1.0 / (pow( n_i , 2 )) );  
 
+    cout << "\nWould you like your transition energy to be in electron Volts , [eV] or Joules, [j]?\n";
+    //While loop for unit conversion
+    while (true){
+      string units;
+      cout << "Enter 'J/j' for Joules or 'eV/e' for Electron Volts: ";
+      cin >> units;
+      //If nested in the while loop
+      if (units == "J" || units == "j"){
+        double energy_joules = photon_energy * 1.602*pow(10,-19);
+        cout << "\nYour transition energy, in joules is " << energy_joules << " j\n";
+        break;
+
+      }else if (units == "eV" || units == "e"){
+        cout << "\nYour energy, in electron volts is " << photon_energy << " eV\n";
+        break;
+
+      }else{
+        cout << "\nInvalid input, please try again.\n";
+      }
+    }
   return 0;
 }
 
