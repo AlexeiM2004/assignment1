@@ -64,6 +64,23 @@ int transition_energy_calculator()
         cout << "\nInvalid input, please try again.\n";
       }
     }
+    //Final while loop to ask if they want to retry
+        while (true){
+      string retry;
+      cout << "\nWould you like to use the energy transition calculator again?\nEnter 'Yes/yes' or 'No/no': ";
+      cin >> retry;
+      //If nested in the while loop
+      if (retry == "Yes" || retry == "yes"){
+        cout << "\n";
+        transition_energy_calculator();
+      }else if (retry == "No" || retry == "no"){
+        cout << "\nThank you for using the energy transition calculator, have a nice day.";
+        break;
+
+      }else{
+        cout << "\nInvalid input, please try again.\n";
+      }
+    }
   return 0;
 }
 
