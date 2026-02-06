@@ -5,6 +5,11 @@
 
 using namespace std;
 
+double photon_energy = 0.0;
+
+int transition_energy_calculator();
+int return_energy_function();
+
 int transition_energy_calculator()
 {
     // Ask user to enter atomic number
@@ -41,10 +46,14 @@ int transition_energy_calculator()
       cout << "Final quantum number n_f: ";
       cin >> n_f;
     }
-        //Photon energy calculation
-    double photon_energy = 13.6 * pow( z , 2 ) * ( 1.0 / (pow( n_f , 2)) - 1.0 / (pow( n_i , 2 )) );  
+    //Photon energy calculation
+    photon_energy = 13.6 * pow( z , 2 ) * ( 1.0 / (pow( n_f , 2)) - 1.0 / (pow( n_i , 2 )) );  
+    return_energy_function();
+  return 0;
+}
 
-    cout << "\nWould you like your transition energy to be in electron Volts , [eV] or Joules, [j]?\n";
+int return_energy_function(){
+ cout << "\nWould you like your transition energy to be in electron Volts , [eV] or Joules, [j]?\n";
     //While loop for unit conversion
     while (true){
       string units;
@@ -73,9 +82,10 @@ int transition_energy_calculator()
       if (retry == "Yes" || retry == "yes"){
         cout << "\n";
         transition_energy_calculator();
+        break;
       }else if (retry == "No" || retry == "no"){
         cout << "\nThank you for using the energy transition calculator, have a nice day.";
-        break;
+        return 0;
 
       }else{
         cout << "\nInvalid input, please try again.\n";
@@ -87,5 +97,6 @@ int transition_energy_calculator()
 int main()
 {
     transition_energy_calculator();
+    return_energy_function();
     return 0;
 }
