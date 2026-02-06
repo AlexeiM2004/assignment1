@@ -18,6 +18,29 @@ int transition_energy_calculator()
       cout << "Please specify your atomic number, z: ";
       cin >> z;
     }
+      //Begin to look at the quantum numbers
+    cout << "\nPlease enter your initial, n_i and final, n_f quantum numbers,\n";
+    double n_f,n_i;
+    cout << "Initial quantum number n_i: ";
+    cin >> n_i;
+    //While loop for the initial quantum number
+    while (n_i <= 0 || cin.fail() ){
+      cout << "\nYou have entered an invalid input, please try again,\n";
+      cin.clear();
+      cin.ignore(1000, '\n');
+      cout << "Initial quantum number n_i: ";
+      cin >> n_i;
+    }
+    //While loop for the final quantum number
+    cout << "Final quantum number n_f: ";
+    cin >> n_f;
+      while (n_f <= 0 || cin.fail() ){
+      cout << "\nYou have entered an invalid input, please try again,\n";
+      cin.clear();
+      cin.ignore(1000, '\n');
+      cout << "Final quantum number n_f: ";
+      cin >> n_f;
+    }
 
   return 0;
 }
