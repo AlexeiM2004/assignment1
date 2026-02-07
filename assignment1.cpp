@@ -48,7 +48,6 @@ int transition_energy_calculator()
     }
     //Photon energy calculation
     photon_energy = 13.6 * pow( z , 2 ) * ( 1.0 / (pow( n_f , 2)) - 1.0 / (pow( n_i , 2 )) );  
-    return_energy_function();
   return 0;
 }
 
@@ -73,8 +72,15 @@ int return_energy_function(){
         cout << "\nInvalid input, please try again.\n";
       }
     }
+  return 0;
+}
+
+int main()
+{
+    transition_energy_calculator();
+    return_energy_function();
     //Final while loop to ask if they want to retry
-        while (true){
+    while (true){
       string retry;
       cout << "\nWould you like to use the energy transition calculator again?\nEnter 'Yes/yes' or 'No/no': ";
       cin >> retry;
@@ -91,12 +97,5 @@ int return_energy_function(){
         cout << "\nInvalid input, please try again.\n";
       }
     }
-  return 0;
-}
-
-int main()
-{
-    transition_energy_calculator();
-    return_energy_function();
     return 0;
 }
