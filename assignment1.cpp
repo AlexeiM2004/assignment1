@@ -1,100 +1,99 @@
+// Atomic Energy Transition Calculator
+// Calculates photon transition energy using the Rydberg energy formula
+// Alexei Maiorov, Student ID: [11022726]
+// Date: [07/02/2026]
+
 #include <iostream>
-#include <vector>
 #include <string>
 #include <cmath>
 
-using namespace std;
-
 double photon_energy = 0.0;
+const double rydberg_constant = 13.6; 
+const double ev_to_joules_conversion = 1.602e-19; 
 
-int transition_energy_calculator();
-int return_energy_function();
+//Function aquires the parameters; atomic number, initial and final quantum number to then calculate the energy
 
-int transition_energy_calculator()
-{
-    // Ask user to enter atomic number
-    cout << "Note, your input must be a positive whole integer greater than 0 and less than 173\n" << "Please specify your atomic number, z: ";
+int calculate_transition_energy(){
+    std::cout << "Welcome to the atomic energy transition calculator for hydrogen like atoms.\nNote, your input must be a positive whole integer greater than 0 and less than 173\n" << "Please specify your atomic number, z: ";
     int z;
-    cin >> z;
-    while ( z<1 || z>173 || cin.fail() ){
-      cout << "\nYou have entered an invalid input, please try again,\n";
-      cin.clear();
-      cin.ignore(1000, '\n');
-      cout << "Please specify your atomic number, z: ";
-      cin >> z;
+    std::cin >> z;
+    while ( z<1 || z>173 || std::cin.fail() ){
+      std::cout << "\nYou have entered an invalid input, please try again,\n";
+      std::cin.clear();
+      std::cin.ignore(1000, '\n');
+      std::cout << "Please specify your atomic number, z: ";
+      std::cin >> z;
     }
-      //Begin to look at the quantum numbers
-    cout << "\nPlease enter your initial, n_i and final, n_f quantum numbers,\n";
+    std::cout << "\nPlease enter your initial, n_i and final, n_f quantum numbers,\n";
     double n_f,n_i;
-    cout << "Initial quantum number n_i: ";
-    cin >> n_i;
-    //While loop for the initial quantum number
-    while (n_i <= 0 || cin.fail() ){
-      cout << "\nYou have entered an invalid input, please try again,\n";
-      cin.clear();
-      cin.ignore(1000, '\n');
-      cout << "Initial quantum number n_i: ";
-      cin >> n_i;
+    std::cout << "Initial quantum number n_i: ";
+    std::cin >> n_i;
+    while (n_i <= 0 || std::cin.fail() ){
+      std::cout << "\nYou have entered an invalid input, please try again,\n";
+      std::cin.clear();
+      std::cin.ignore(1000, '\n');
+      std::cout << "Initial quantum number n_i: ";
+      std::cin >> n_i;
     }
-    //While loop for the final quantum number
-    cout << "Final quantum number n_f: ";
-    cin >> n_f;
-      while (n_f <= 0 || cin.fail() ){
-      cout << "\nYou have entered an invalid input, please try again,\n";
-      cin.clear();
-      cin.ignore(1000, '\n');
-      cout << "Final quantum number n_f: ";
-      cin >> n_f;
+    std::cout << "Final quantum number n_f: ";
+    std::cin >> n_f;
+      while (n_f <= 0 || std::cin.fail() ){
+      std::cout << "\nYou have entered an invalid input, please try again,\n";
+      std::cin.clear();
+      std::cin.ignore(1000, '\n');
+      std::cout << "Final quantum number n_f: ";
+      std::cin >> n_f;
     }
-    //Photon energy calculation
-    photon_energy = 13.6 * pow( z , 2 ) * ( 1.0 / (pow( n_f , 2)) - 1.0 / (pow( n_i , 2 )) );  
+    //Photon energy is calculated using the Rydberg constant, the given atomic number, final and initial quantum numbers
+    photon_energy = rydberg_constant * std::pow( z , 2 ) * ( 1.0 / (std::pow( n_f , 2)) - 1.0 / (std::pow( n_i , 2 )) );  
   return 0;
 }
 
-int return_energy_function(){
- cout << "\nWould you like your transition energy to be in electron Volts , [eV] or Joules, [j]?\n";
-    //While loop for unit conversion
+//Function gives user the choice for energy to be displayed in eV or Joules
+
+int display_energy_units(){
+  std::cout << "\nWould you like your transition energy to be in electron Volts , [eV] or Joules, [j]?\n";
     while (true){
-      string units;
-      cout << "Enter 'J/j' for Joules or 'eV/e' for Electron Volts: ";
-      cin >> units;
-      //If nested in the while loop
+      std::string units;
+      std::cout << "Enter 'J/j' for Joules or 'eV/e' for Electron Volts: ";
+      std::cin >> units;
       if (units == "J" || units == "j"){
-        double energy_joules = photon_energy * 1.602*pow(10,-19);
-        cout << "\nYour transition energy, in joules is " << energy_joules << " j\n";
+        double energy_joules = photon_energy * ev_to_joules_conversion;
+        std::cout << "\nYour transition energy, in joules is " << energy_joules << " j\n";
         break;
 
       }else if (units == "eV" || units == "e"){
-        cout << "\nYour energy, in electron volts is " << photon_energy << " eV\n";
+        std::cout << "\nYour energy, in electron volts is " << photon_energy << " eV\n";
         break;
 
       }else{
-        cout << "\nInvalid input, please try again.\n";
+        std::cout << "\nInvalid input, please try again.\n";
       }
     }
   return 0;
 }
 
+//Main function calls both functions and gives the user a choice if they would like to re-use the calculator
+
 int main()
 {
-    transition_energy_calculator();
-    return_energy_function();
-    //Final while loop to ask if they want to retry
+    calculate_transition_energy();
+    display_energy_units();
     while (true){
-      string retry;
-      cout << "\nWould you like to use the energy transition calculator again?\nEnter 'Yes/yes' or 'No/no': ";
-      cin >> retry;
+      std::string retry;
+      std::cout << "\nWould you like to use the energy transition calculator again?\nEnter 'Yes/yes' or 'No/no': ";
+      std::cin >> retry;
       //If nested in the while loop
       if (retry == "Yes" || retry == "yes"){
-        cout << "\n";
-        transition_energy_calculator();
-        break;
+        std::cout << "\n";
+        calculate_transition_energy();
+        display_energy_units();
       }else if (retry == "No" || retry == "no"){
-        cout << "\nThank you for using the energy transition calculator, have a nice day.";
+        std::cout << "\nThank you for using the energy transition calculator, have a nice day.";
         return 0;
 
       }else{
-        cout << "\nInvalid input, please try again.\n";
+        std::cout << "\nInvalid input, please try again.\n";
       }
     }
     return 0;
