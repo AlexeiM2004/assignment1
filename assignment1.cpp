@@ -15,10 +15,10 @@ const double ev_to_joules_conversion = 1.602e-19;
 const double plancks_const = 6.626e-34;
 const double speed_light = 299792458;
 
-//Function aquires the parameters; atomic number, initial and final quantum number to then calculate the energy
+//Function acquires the parameters; atomic number, initial and final quantum number to then calculate the energy
 //Int& means to pass by reference, this is useful for passing around the local variables between functions
 
-void aquire_energy_parameters(int& atomic_number, int& initial_quantum_number, int& final_quantum_number)
+void acquire_energy_parameters(int& atomic_number, int& initial_quantum_number, int& final_quantum_number)
 {
   std::cout << "Welcome to the atomic energy transition calculator for hydrogen like atoms.\nNote, your input must be a positive whole integer greater than 0 and less than 173\n" << "Please specify your atomic number, z: ";
   std::cin >> atomic_number;
@@ -60,7 +60,7 @@ void aquire_energy_parameters(int& atomic_number, int& initial_quantum_number, i
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-//Seperate function to calculate the photon's energy, by taking in the parameters aquired in the previous function
+//Seperate function to calculate the photon's energy, by taking in the parameters acquired in the previous function
 
 double photon_energy_calculator(int atomic_number, int initial_quantum_number, int final_quantum_number)
 {
@@ -166,7 +166,7 @@ int main()
   double photon_energy = 0;
   double photon_wavelength = 0;
   //Call the functions with their variables passed into them
-  aquire_energy_parameters(atomic_number, initial_quantum_number, final_quantum_number);
+  acquire_energy_parameters(atomic_number, initial_quantum_number, final_quantum_number);
   photon_energy = photon_energy_calculator(atomic_number, initial_quantum_number, final_quantum_number);
   photon_wavelength = photon_wavelength_calculator(photon_energy);
   display_energy_units(photon_energy,photon_wavelength);
@@ -179,7 +179,7 @@ int main()
     if (retry == "Yes" || retry == "yes")
     {
       std::cout << "\n";
-        aquire_energy_parameters(atomic_number, initial_quantum_number, final_quantum_number);
+        acquire_energy_parameters(atomic_number, initial_quantum_number, final_quantum_number);
         photon_energy = photon_energy_calculator(atomic_number, initial_quantum_number, final_quantum_number);
         photon_wavelength = photon_wavelength_calculator(photon_energy);
         display_energy_units(photon_energy,photon_wavelength);
