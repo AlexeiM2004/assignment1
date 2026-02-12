@@ -32,7 +32,6 @@ void aquire_energy_parameters(int& atomic_number, int& initial_quantum_number, i
   }
   std::cin.clear();
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-  std::cout << "\nYour atomic number is " << atomic_number;
   std::cout << "\nPlease enter your initial, n_i and final, n_f quantum numbers,\n";
 
   std::cout << "Initial quantum number n_i: ";
