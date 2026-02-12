@@ -16,7 +16,7 @@ const double plancks_const = 6.626e-34;
 const double speed_light = 299792458;
 
 //Function aquires the parameters; atomic number, initial and final quantum number to then calculate the energy
-//Int& means to pass by reference
+//Int& means to pass by reference, this is useful for passing around the local variables between functions
 
 void aquire_energy_parameters(int& atomic_number, int& initial_quantum_number, int& final_quantum_number)
 {
@@ -67,7 +67,7 @@ double photon_energy_calculator(int atomic_number, int initial_quantum_number, i
 {
   double photon_energy = 0;
   //Photon energy is calculated using the Rydberg constant, the given atomic number, final and initial quantum numbers
-  photon_energy = std::abs(rydberg_constant * std::pow( atomic_number , 2 ) * ( 1.0 / (std::pow( final_quantum_number , 2)) - 1.0 / (std::pow( initial_quantum_number , 2 ))));  
+  photon_energy = rydberg_constant * std::pow( atomic_number , 2 ) * ( 1.0 / (std::pow( final_quantum_number , 2)) - 1.0 / (std::pow( initial_quantum_number , 2 )));  
 
   return photon_energy;
 }
@@ -76,7 +76,7 @@ double photon_energy_calculator(int atomic_number, int initial_quantum_number, i
 
 double photon_wavelength_calculator(double photon_energy)
 {
-  double photon_wavelength = plancks_const * speed_light / (photon_energy * ev_to_joules_conversion);
+  double photon_wavelength = plancks_const * speed_light / (std::abs(photon_energy) * ev_to_joules_conversion);
 
   return photon_wavelength;
 
@@ -137,14 +137,14 @@ void display_energy_units(double photon_energy, double photon_wavelength)
     if (units == "J" || units == "j")
     {
       double energy_joules = photon_energy * ev_to_joules_conversion;
-      std::cout << "\nYour transition energy, in joules is " << energy_joules << " j\n";
+      std::cout << "\nYour transition energy, in joules is " << std::abs(energy_joules) << " j\n";
       classify_energy_transition(photon_energy);
       classify_wavelength(photon_wavelength);
       break;
 
     }else if (units == "eV" || units == "e")
     {
-      std::cout << "\nYour energy, in electron volts is " << photon_energy << " eV\n";
+      std::cout << "\nYour energy, in electron volts is " << std::abs(photon_energy) << " eV\n";
       classify_energy_transition(photon_energy);
       classify_wavelength(photon_wavelength);
       break;
@@ -166,6 +166,7 @@ int main()
   int final_quantum_number = 0;
   double photon_energy = 0;
   double photon_wavelength = 0;
+  //Call the functions with their variables passed into them
   aquire_energy_parameters(atomic_number, initial_quantum_number, final_quantum_number);
   photon_energy = photon_energy_calculator(atomic_number, initial_quantum_number, final_quantum_number);
   photon_wavelength = photon_wavelength_calculator(photon_energy);
